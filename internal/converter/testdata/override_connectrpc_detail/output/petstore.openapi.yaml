@@ -1,0 +1,649 @@
+openapi: 3.1.0
+info:
+  title: io.swagger.petstore.v3
+paths:
+  /pet/{pet_id}:
+    get:
+      tags:
+        - io.swagger.petstore.v3.PetService
+      summary: GetPetByID
+      operationId: io.swagger.petstore.v3.PetService.GetPetByID
+      parameters:
+        - name: pet_id
+          in: path
+          required: true
+          schema:
+            type:
+              - integer
+              - string
+            title: pet_id
+            format: int64
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/io.swagger.petstore.v3.Pet'
+    post:
+      tags:
+        - io.swagger.petstore.v3.PetService
+      summary: UpdatePetWithForm
+      operationId: io.swagger.petstore.v3.PetService.UpdatePetWithForm
+      parameters:
+        - name: pet_id
+          in: path
+          required: true
+          schema:
+            type:
+              - integer
+              - string
+            title: pet_id
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  title: name
+                status:
+                  type: string
+                  title: status
+              title: UpdatePetWithFormReq
+              additionalProperties: false
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/google.protobuf.Empty'
+    delete:
+      tags:
+        - io.swagger.petstore.v3.PetService
+      summary: DeletePet
+      operationId: io.swagger.petstore.v3.PetService.DeletePet
+      parameters:
+        - name: pet_id
+          in: path
+          required: true
+          schema:
+            type:
+              - integer
+              - string
+            title: pet_id
+            format: int64
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/google.protobuf.Empty'
+  /pet/{pet_id}/uploadImage:
+    post:
+      tags:
+        - io.swagger.petstore.v3.PetService
+      summary: UploadFile
+      operationId: io.swagger.petstore.v3.PetService.UploadFile
+      parameters:
+        - name: pet_id
+          in: path
+          required: true
+          schema:
+            type:
+              - integer
+              - string
+            title: pet_id
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                additionalMetadata:
+                  type: string
+                  title: additional_metadata
+                file:
+                  type: string
+                  title: file
+              title: UploadFileReq
+              additionalProperties: false
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/io.swagger.petstore.v3.ApiResponse'
+  /pet:
+    put:
+      tags:
+        - io.swagger.petstore.v3.PetService
+      summary: UpdatePet
+      operationId: io.swagger.petstore.v3.PetService.UpdatePet
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/io.swagger.petstore.v3.Pet'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/io.swagger.petstore.v3.Pet'
+    post:
+      tags:
+        - io.swagger.petstore.v3.PetService
+      summary: AddPet
+      operationId: io.swagger.petstore.v3.PetService.AddPet
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/io.swagger.petstore.v3.Pet'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/io.swagger.petstore.v3.Pet'
+  /pet/findByTags:
+    get:
+      tags:
+        - io.swagger.petstore.v3.PetService
+      summary: FindPetsByTag
+      operationId: io.swagger.petstore.v3.PetService.FindPetsByTag
+      parameters:
+        - name: tag
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+            title: tag
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/io.swagger.petstore.v3.Pet'
+                title: pets
+  /pet/findByStatus:
+    get:
+      tags:
+        - io.swagger.petstore.v3.PetService
+      summary: FindPetsByStatus
+      operationId: io.swagger.petstore.v3.PetService.FindPetsByStatus
+      parameters:
+        - name: status
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+            title: status
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/io.swagger.petstore.v3.Pet'
+                title: pets
+components:
+  schemas:
+    io.swagger.petstore.v3.Status:
+      type: string
+      title: Status
+      enum:
+        - unknown
+        - available
+        - pending
+        - sold
+      description: |-
+        These do not use standard naming practices in order to match
+         the JSON format of the Pet Store Open API schema, which uses
+         lower-case names for these constants.
+    google.protobuf.Empty:
+      type: object
+      description: |-
+        A generic empty message that you can re-use to avoid defining duplicated
+         empty messages in your APIs. A typical example is to use it as the request
+         or the response type of an API method. For instance:
+
+             service Foo {
+               rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
+             }
+    io.swagger.petstore.v3.ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          title: code
+          format: int32
+        type:
+          type: string
+          title: type
+        message:
+          type: string
+          title: message
+      title: ApiResponse
+      additionalProperties: false
+    io.swagger.petstore.v3.Category:
+      type: object
+      properties:
+        id:
+          type:
+            - integer
+            - string
+          title: id
+          format: int64
+        name:
+          type: string
+          title: name
+      title: Category
+      additionalProperties: false
+    io.swagger.petstore.v3.Pet:
+      type: object
+      properties:
+        id:
+          type:
+            - integer
+            - string
+          title: id
+          format: int64
+        category:
+          title: category
+          $ref: '#/components/schemas/io.swagger.petstore.v3.Category'
+        name:
+          type: string
+          title: name
+        photoUrls:
+          type: array
+          items:
+            type: string
+          title: photo_urls
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/io.swagger.petstore.v3.Tag'
+          title: tags
+        status:
+          type: string
+          title: status
+      title: Pet
+      additionalProperties: false
+    io.swagger.petstore.v3.PetBody:
+      type: object
+      properties:
+        petId:
+          type:
+            - integer
+            - string
+          title: pet_id
+          format: int64
+        body:
+          type: string
+          title: body
+      title: PetBody
+      additionalProperties: false
+    io.swagger.petstore.v3.PetID:
+      type: object
+      properties:
+        petId:
+          type:
+            - integer
+            - string
+          title: pet_id
+          format: int64
+      title: PetID
+      additionalProperties: false
+    io.swagger.petstore.v3.Pets:
+      type: object
+      properties:
+        pets:
+          type: array
+          items:
+            $ref: '#/components/schemas/io.swagger.petstore.v3.Pet'
+          title: pets
+      title: Pets
+      additionalProperties: false
+    io.swagger.petstore.v3.StatusReq:
+      type: object
+      properties:
+        status:
+          type: array
+          items:
+            type: string
+          title: status
+      title: StatusReq
+      additionalProperties: false
+    io.swagger.petstore.v3.Tag:
+      type: object
+      properties:
+        id:
+          type:
+            - integer
+            - string
+          title: id
+          format: int64
+        name:
+          type: string
+          title: name
+      title: Tag
+      additionalProperties: false
+    io.swagger.petstore.v3.TagReq:
+      type: object
+      properties:
+        tag:
+          type: array
+          items:
+            type: string
+          title: tag
+      title: TagReq
+      additionalProperties: false
+    io.swagger.petstore.v3.UpdatePetWithFormReq:
+      type: object
+      properties:
+        petId:
+          type:
+            - integer
+            - string
+          title: pet_id
+          format: int64
+        name:
+          type: string
+          title: name
+        status:
+          type: string
+          title: status
+      title: UpdatePetWithFormReq
+      additionalProperties: false
+    io.swagger.petstore.v3.UploadFileReq:
+      type: object
+      properties:
+        petId:
+          type:
+            - integer
+            - string
+          title: pet_id
+          format: int64
+        additionalMetadata:
+          type: string
+          title: additional_metadata
+        file:
+          type: string
+          title: file
+      title: UploadFileReq
+      additionalProperties: false
+    connect-protocol-version:
+      type: number
+      title: Connect-Protocol-Version
+      enum:
+        - 1
+      description: Define the version of the Connect protocol
+      const: 1
+    connect-timeout-header:
+      type: number
+      title: Connect-Timeout-Ms
+      description: Define the timeout, in ms
+    google.rpc.ErrorInfo:
+      type: object
+      properties:
+        reason:
+          type: string
+          description: The reason of the error in UPPER_SNAKE_CASE.
+        domain:
+          type: string
+          description: The logical grouping to which the error reason belongs.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: Additional structured details about the error.
+    google.rpc.Duration:
+      type: object
+      properties:
+        seconds:
+          type: integer
+          format: int64
+        nanos:
+          type: integer
+          format: int32
+    google.rpc.RetryInfo:
+      type: object
+      properties:
+        retry_delay:
+          $ref: '#/components/schemas/google.rpc.Duration'
+    google.rpc.DebugInfo:
+      type: object
+      properties:
+        stack_entries:
+          type: array
+          items:
+            type: string
+          description: The stack trace entries of the caller that led to the error being generated.
+        detail:
+          type: string
+          description: Additional debugging information provided by the server.
+    google.rpc.QuotaFailure.Violation:
+      type: object
+      properties:
+        subject:
+          type: string
+          description: The subject on which the quota check failed.
+        description:
+          type: string
+          description: A description of how the quota check failed.
+    google.rpc.QuotaFailure:
+      type: object
+      properties:
+        violations:
+          type: array
+          items:
+            $ref: '#/components/schemas/google.rpc.QuotaFailure.Violation'
+    google.rpc.PreconditionFailure.Violation:
+      type: object
+      properties:
+        type:
+          type: string
+          description: The type of precondition failure.
+        subject:
+          type: string
+          description: The subject relative to the type.
+        description:
+          type: string
+          description: A description of how the precondition failed.
+    google.rpc.PreconditionFailure:
+      type: object
+      properties:
+        violations:
+          type: array
+          items:
+            $ref: '#/components/schemas/google.rpc.PreconditionFailure.Violation'
+    google.rpc.BadRequest.FieldViolation:
+      type: object
+      properties:
+        field:
+          type: string
+          description: A path that leads to a field in the request body.
+        description:
+          type: string
+          description: A description of why the request element is invalid.
+        reason:
+          type: string
+          description: The reason for the field-level error in UPPER_SNAKE_CASE.
+    google.rpc.BadRequest:
+      type: object
+      properties:
+        field_violations:
+          type: array
+          items:
+            $ref: '#/components/schemas/google.rpc.BadRequest.FieldViolation'
+    google.rpc.RequestInfo:
+      type: object
+      properties:
+        request_id:
+          type: string
+          description: An opaque string used for identifying requests in logs.
+        serving_data:
+          type: string
+          description: Data used to serve this request.
+    google.rpc.ResourceInfo:
+      type: object
+      properties:
+        resource_type:
+          type: string
+          description: A name for the type of resource being accessed.
+        resource_name:
+          type: string
+          description: The name of the resource being accessed.
+        owner:
+          type: string
+          description: The owner of the resource.
+        description:
+          type: string
+          description: Describes what error is encountered when accessing this resource.
+    google.rpc.Help:
+      type: object
+      properties:
+        url:
+          type: string
+          description: The URL of the link.
+        description:
+          type: string
+          description: Describes what the link offers.
+    google.rpc.LocalizedMessage:
+      type: object
+      properties:
+        locale:
+          type: string
+          description: The locale used for the message.
+        message:
+          type: string
+          description: The localized error message.
+    connect.error:
+      type: object
+      properties:
+        code:
+          type: string
+          examples:
+            - not_found
+          enum:
+            - canceled
+            - unknown
+            - invalid_argument
+            - deadline_exceeded
+            - not_found
+            - already_exists
+            - permission_denied
+            - resource_exhausted
+            - failed_precondition
+            - aborted
+            - out_of_range
+            - unimplemented
+            - internal
+            - unavailable
+            - data_loss
+            - unauthenticated
+          description: The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
+        message:
+          type: string
+          description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.
+        detail:
+          type: array
+          oneOf:
+            - $ref: '#/components/schemas/google.rpc.DebugInfo'
+            - $ref: '#/components/schemas/google.rpc.Help'
+            - $ref: '#/components/schemas/google.rpc.LocalizedMessage'
+            - $ref: '#/components/schemas/google.rpc.RequestInfo'
+            - $ref: '#/components/schemas/google.rpc.ResourceInfo'
+            - $ref: '#/components/schemas/google.rpc.RetryInfo'
+            - $ref: '#/components/schemas/google.rpc.QuotaFailure'
+            - $ref: '#/components/schemas/google.rpc.PreconditionFailure'
+            - $ref: '#/components/schemas/google.rpc.BadRequest'
+          description: A list of messages that carry the error details. There is a common set of message types for APIs to use.
+      title: Connect Error
+      additionalProperties: true
+      description: 'Error type returned by Connect: https://connectrpc.com/docs/go/errors/#http-representation'
+    google.protobuf.Any:
+      type: object
+      properties:
+        type:
+          type: string
+        value:
+          type: string
+          format: binary
+        debug:
+          type: object
+          additionalProperties: true
+      additionalProperties: true
+      description: Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
+security: []
+tags:
+  - name: io.swagger.petstore.v3.PetService
