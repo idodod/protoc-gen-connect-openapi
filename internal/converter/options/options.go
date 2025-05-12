@@ -49,6 +49,8 @@ type Options struct {
 	ShortServiceTags bool
 	// ShortOperationIds sets the operationId to shortServiceName + "_" + method short name instead of the full method name.
 	ShortOperationIds bool
+	// OverrideConnectErrorDetail sets the "Connect Error" "detail" field as an array of OneOfs instead of the default google.protobuf.Any
+	OverrideConnectErrorDetail bool
 
 	MessageAnnotator        MessageAnnotator
 	FieldAnnotator          FieldAnnotator
@@ -155,6 +157,8 @@ func FromString(s string) (Options, error) {
 			for _, service := range services {
 				opts.Services = append(opts.Services, protoreflect.FullName(service))
 			}
+		case param == "override-connecterror-detail":
+			opts.OverrideConnectErrorDetail = true
 		default:
 			return opts, fmt.Errorf("invalid parameter: %s", param)
 		}
